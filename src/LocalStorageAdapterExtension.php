@@ -21,11 +21,4 @@ class LocalStorageAdapterExtension extends StorageAdapterExtension
      */
     protected $provides = 'anomaly.module.files::storage_adapter.local';
 
-    /**
-     * The register flysystem adapter.
-     *
-     * @var string
-     */
-    protected $adapter = 'local';
-
 }
