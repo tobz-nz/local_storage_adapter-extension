@@ -1,10 +1,10 @@
 <?php namespace Anomaly\LocalStorageAdapterExtension;
 
 use Anomaly\FilesModule\Disk\Contract\DiskInterface;
+use Anomaly\FilesModule\Support\Filesystem;
 use Anomaly\Streams\Platform\Application\Application;
 use Illuminate\Filesystem\FilesystemManager;
 use League\Flysystem\Adapter\Local;
-use League\Flysystem\Filesystem;
 
 /**
  * Class LocalStorageAdapterFilesystem
@@ -29,7 +29,7 @@ class LocalStorageAdapterFilesystem
         $manager->extend(
             $disk->getSlug(),
             function () use ($disk, $application) {
-                return new Filesystem(new Local($application->getStoragePath("files/{$disk->getSlug()}")));
+                return new Filesystem($disk, new Local($application->getStoragePath("files/{$disk->getSlug()}")));
             }
         );
     }
