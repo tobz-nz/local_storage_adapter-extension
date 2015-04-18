@@ -1,7 +1,8 @@
 <?php namespace Anomaly\LocalStorageAdapterExtension;
 
+use Anomaly\ConfigurationModule\Configuration\Contract\ConfigurationRepositoryInterface;
 use Anomaly\FilesModule\Disk\Contract\DiskInterface;
-use Anomaly\FilesModule\Support\Filesystem;
+use Anomaly\FilesModule\FilesFilesystem;
 use Anomaly\Streams\Platform\Application\Application;
 use Illuminate\Filesystem\FilesystemManager;
 use League\Flysystem\Adapter\Local;
@@ -20,16 +21,39 @@ class LocalStorageAdapterFilesystem
     /**
      * Handle loading the filesystem.
      *
-     * @param DiskInterface     $disk
-     * @param FilesystemManager $manager
-     * @param Application       $application
+     * @param DiskInterface                    $disk
+     * @param FilesystemManager                $manager
+     * @param Application                      $application
+     * @param ConfigurationRepositoryInterface $configuration
      */
-    public function load(DiskInterface $disk, FilesystemManager $manager, Application $application)
-    {
+    public function load(
+        DiskInterface $disk,
+        FilesystemManager $manager,
+        Application $application,
+        ConfigurationRepositoryInterface $configuration
+    ) {
         $manager->extend(
             $disk->getSlug(),
-            function () use ($disk, $application) {
-                return new Filesystem($disk, new Local($application->getStoragePath("files/{$disk->getSlug()}")));
+            function () use ($disk, $application, $configuration) {
+
+                $mode = $configuration->get(
+                    'anomaly.extension.local_storage_adapter::mode',
+                    $disk->getSlug(),
+                    'public'
+                );
+
+                if ($mode === 'private') {
+                    $method = 'getStoragePath';
+                } else {
+                    $method = 'getAssetsPath';
+                }
+
+                return new FilesFilesystem(
+                    $disk,
+                    new Local(
+                        $application->{$method}("files/{$disk->getSlug()}")
+                    )
+                );
             }
         );
     }
