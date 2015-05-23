@@ -1,8 +1,8 @@
 <?php namespace Anomaly\LocalStorageAdapterExtension;
 
 use Anomaly\ConfigurationModule\Configuration\Contract\ConfigurationRepositoryInterface;
+use Anomaly\FilesModule\Adapter\StorageAdapterFilesystem;
 use Anomaly\FilesModule\Disk\Contract\DiskInterface;
-use Anomaly\FilesModule\FilesFilesystem;
 use Anomaly\Streams\Platform\Application\Application;
 use Illuminate\Filesystem\FilesystemManager;
 use League\Flysystem\Adapter\Local;
@@ -37,7 +37,7 @@ class LocalStorageAdapterFilesystem
             function () use ($disk, $application, $configuration) {
 
                 $mode = $configuration->get(
-                    'anomaly.extension.local_storage_adapter::mode',
+                    'anomaly.extension.local_storage_adapter::privacy',
                     $disk->getSlug(),
                     'public'
                 );
@@ -48,10 +48,10 @@ class LocalStorageAdapterFilesystem
                     $method = 'getAssetsPath';
                 }
 
-                return new FilesFilesystem(
+                return new StorageAdapterFilesystem(
                     $disk,
                     new Local(
-                        $application->{$method}("files/{$disk->getSlug()}")
+                        $application->{$method}("streams/files/{$disk->getSlug()}")
                     )
                 );
             }
