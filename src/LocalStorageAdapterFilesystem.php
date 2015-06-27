@@ -6,6 +6,7 @@ use Anomaly\FilesModule\Disk\Contract\DiskInterface;
 use Anomaly\Streams\Platform\Application\Application;
 use Illuminate\Filesystem\FilesystemManager;
 use League\Flysystem\Adapter\Local;
+use League\Flysystem\MountManager;
 
 /**
  * Class LocalStorageAdapterFilesystem
@@ -29,6 +30,7 @@ class LocalStorageAdapterFilesystem
     public function load(
         DiskInterface $disk,
         FilesystemManager $manager,
+        MountManager $flysystem,
         Application $application,
         ConfigurationRepositoryInterface $configuration
     ) {
@@ -56,5 +58,7 @@ class LocalStorageAdapterFilesystem
                 );
             }
         );
+
+        $flysystem->mountFilesystem($disk->getSlug(), $manager->disk($disk->getSlug())->getDriver());
     }
 }
