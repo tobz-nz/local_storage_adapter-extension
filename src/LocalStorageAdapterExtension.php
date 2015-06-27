@@ -1,6 +1,6 @@
 <?php namespace Anomaly\LocalStorageAdapterExtension;
 
-use Anomaly\FilesModule\Adapter\StorageAdapterExtension;
+use Anomaly\FilesModule\Adapter\AdapterExtension;
 
 /**
  * Class LocalStorageAdapterExtension
@@ -10,7 +10,7 @@ use Anomaly\FilesModule\Adapter\StorageAdapterExtension;
  * @author        Ryan Thompson <ryan@anomaly.is>
  * @package       Anomaly\LocalStorageAdapterExtension
  */
-class LocalStorageAdapterExtension extends StorageAdapterExtension
+class LocalStorageAdapterExtension extends AdapterExtension
 {
 
     /**
@@ -19,6 +19,6 @@ class LocalStorageAdapterExtension extends StorageAdapterExtension
      *
      * @var string
      */
-    protected $provides = 'anomaly.module.files::storage_adapter.local';
+    protected $provides = 'anomaly.module.files::adapter.local';
 
 }
