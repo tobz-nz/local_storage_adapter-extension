@@ -19,16 +19,40 @@ class LocalStorageAdapterDriver
 {
 
     /**
+     * The application instance.
+     *
+     * @var Application
+     */
+    protected $application;
+
+    /**
+     * The configuration repository.
+     *
+     * @var ConfigurationRepositoryInterface
+     */
+    protected $configuration;
+
+    /**
+     * Create a new LocalStorageAdapterDriver instance.
+     *
+     * @param Application                      $application
+     * @param ConfigurationRepositoryInterface $configuration
+     */
+    function __construct(Application $application, ConfigurationRepositoryInterface $configuration)
+    {
+        $this->application   = $application;
+        $this->configuration = $configuration;
+    }
+
+    /**
      * Return the configured filesystem driver.
      *
-     * @param ConfigurationRepositoryInterface $configuration
-     * @param DiskInterface                    $disk
-     * @param Application                      $application
+     * @param DiskInterface $disk
      * @return AdapterFilesystem
      */
-    public function make(ConfigurationRepositoryInterface $configuration, DiskInterface $disk, Application $application)
+    public function make(DiskInterface $disk)
     {
-        $mode = $configuration->get(
+        $mode = $this->configuration->get(
             'anomaly.extension.local_storage_adapter::privacy',
             $disk->getSlug(),
             'public'
@@ -41,7 +65,7 @@ class LocalStorageAdapterDriver
         }
 
         return new AdapterFilesystem(
-            new Local($application->{$method}("streams/files/{$disk->getSlug()}"))
+            new Local($this->application->{$method}("streams/files/{$disk->getSlug()}"))
         );
     }
 }
