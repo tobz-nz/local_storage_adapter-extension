@@ -6,7 +6,6 @@ use Anomaly\FilesModule\Adapter\StorageAdapterFilesystem;
 use Anomaly\FilesModule\Disk\Contract\DiskInterface;
 use Anomaly\Streams\Platform\Application\Application;
 use League\Flysystem\Adapter\Local;
-use League\Flysystem\MountManager;
 
 /**
  * Class LocalStorageAdapterDriver
@@ -42,10 +41,7 @@ class LocalStorageAdapterDriver
         }
 
         return new AdapterFilesystem(
-            $disk,
-            new Local(
-                $application->{$method}("streams/files/{$disk->getSlug()}")
-            )
+            new Local($application->{$method}("streams/files/{$disk->getSlug()}"))
         );
     }
 }
