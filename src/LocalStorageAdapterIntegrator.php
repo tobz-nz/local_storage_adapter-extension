@@ -23,6 +23,16 @@ class LocalStorageAdapterIntegrator
     protected $manager;
 
     /**
+     * Create a new LocalStorageAdapterIntegrator instance.
+     *
+     * @param FilesystemManager $manager
+     */
+    function __construct(FilesystemManager $manager)
+    {
+        $this->manager = $manager;
+    }
+
+    /**
      * Integrate the disk with Laravel.
      *
      * @param DiskInterface     $disk
