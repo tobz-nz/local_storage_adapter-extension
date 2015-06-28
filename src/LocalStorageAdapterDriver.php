@@ -65,6 +65,7 @@ class LocalStorageAdapterDriver
         }
 
         return new AdapterFilesystem(
+            $disk,
             new Local($this->application->{$method}("streams/files/{$disk->getSlug()}"))
         );
     }
