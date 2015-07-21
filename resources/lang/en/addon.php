@@ -1,6 +1,7 @@
 <?php
 
 return [
-    'name'        => 'Local Storage Adapter',
-    'description' => 'A local storage adapter for the files module.'
+    'title'       => 'Local Storage',
+    'name'        => 'Local Storage Adapter Extension',
+    'description' => 'A local file storage adapter for the files module.'
 ];
