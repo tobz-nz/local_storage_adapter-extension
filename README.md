@@ -1,3 +1,3 @@
 # Local Storage Adapter Extension
 
-A local storage adapter for the Files module.
+A local file storage adapter for the Files module.

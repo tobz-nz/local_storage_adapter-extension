@@ -1,7 +1,7 @@
 {
     "name": "anomaly/local_storage_adapter-extension",
     "type": "streams-addon",
-    "description": "A local storage adapter for the Files module.",
+    "description": "A local file storage adapter for the Files module.",
     "keywords": [
         "streams extension",
         "streams addon",
