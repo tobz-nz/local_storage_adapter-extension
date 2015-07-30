@@ -1,5 +1,6 @@
 <?php namespace Anomaly\LocalStorageAdapterExtension;
 
+use Anomaly\FilesModule\Adapter\Contract\DiskLoaderInterface;
 use Anomaly\FilesModule\Disk\Contract\DiskInterface;
 
 /**
@@ -10,7 +11,7 @@ use Anomaly\FilesModule\Disk\Contract\DiskInterface;
  * @author        Ryan Thompson <ryan@anomaly.is>
  * @package       Anomaly\LocalStorageAdapterExtension
  */
-class LocalStorageAdapterLoader
+class LocalStorageAdapterLoader implements DiskLoaderInterface
 {
 
     /**
