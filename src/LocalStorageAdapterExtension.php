@@ -1,6 +1,6 @@
 <?php namespace Anomaly\LocalStorageAdapterExtension;
 
-use Anomaly\FilesModule\Adapter\Contract\AdapterInterface;
+use Anomaly\FilesModule\Disk\Adapter\Contract\AdapterInterface;
 use Anomaly\FilesModule\Disk\Contract\DiskInterface;
 use Anomaly\LocalStorageAdapterExtension\Command\LoadDisk;
 use Anomaly\Streams\Platform\Addon\Extension\Extension;
