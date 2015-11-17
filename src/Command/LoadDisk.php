@@ -1,7 +1,7 @@
 <?php namespace Anomaly\LocalStorageAdapterExtension\Command;
 
 use Anomaly\ConfigurationModule\Configuration\Contract\ConfigurationRepositoryInterface;
-use Anomaly\FilesModule\Adapter\AdapterFilesystem;
+use Anomaly\FilesModule\Disk\Adapter\AdapterFilesystem;
 use Anomaly\FilesModule\Disk\Contract\DiskInterface;
 use Anomaly\Streams\Platform\Application\Application;
 use Illuminate\Contracts\Bus\SelfHandling;
