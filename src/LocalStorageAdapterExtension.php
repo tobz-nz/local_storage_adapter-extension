@@ -1,6 +1,6 @@
 <?php namespace Anomaly\LocalStorageAdapterExtension;
 
-use Anomaly\FilesModule\Adapter\AdapterExtension;
+use Anomaly\FilesModule\Disk\Adapter\AdapterExtension;
 
 /**
  * Class LocalStorageAdapterExtension
